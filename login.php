@@ -13,15 +13,15 @@ if($username=='' || $password=='')
 $error='All fields are required';
 }
 
-$sql = "select * from user where username='".$username."' and password = '".md5($password)."'";
+$sql = "select * from user where username='".$username."' and password = '".$password."'";
 
 $q = $conn->query($sql);
 if($q->num_rows==1)
 {
 $res = $q->fetch_assoc();
 $_SESSION['rainbow_username']=$res['username'];
+$_SESSION['rainbow_password']=$res['password'];
 $_SESSION['rainbow_uid']=$res['id'];
-$_SESSION['rainbow_name']=$res['name'];
 echo '<script type="text/javascript">window.location="index.php"; </script>';
 
 }else
@@ -39,7 +39,7 @@ $error = 'Invalid Username or Password';
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College Fees Payment System</title>
+    <title>Morris Garage</title>
 
     <!-- BOOTSTRAP STYLES-->
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -64,7 +64,7 @@ text-align:center;
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
                           
                             <div class="panel-body" style="background-color: #E2E2E2; margin-top:50px; border:solid 3px #0e0e0e;">
-							  <h3 class="myhead">College Fees Payment System</h3>
+							  <h3 class="myhead">Morris Garage</h3>
                                 <form role="form" action="login.php" method="post">
                                     <hr />
 									<?php

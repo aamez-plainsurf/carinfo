@@ -5,62 +5,47 @@ $errormsg = '';
 $action = "add";
 
 $id="";
-$emailid='';
-$sname='';
-$joindate = '';
-$remark='';
+$cname='';
+$address='';
 $contact='';
-$balance = 0;
-$fees='';
-$about = '';
-$branch='';
+$model='';
+$price = '';
+$payment='';
 
 
 if(isset($_POST['save']))
 {
 
-$sname = mysqli_real_escape_string($conn,$_POST['sname']);
-$joindate = mysqli_real_escape_string($conn,$_POST['joindate']);
-
+$cname = mysqli_real_escape_string($conn,$_POST['cname']);
+$address = mysqli_real_escape_string($conn,$_POST['address']);
 $contact = mysqli_real_escape_string($conn,$_POST['contact']);
-$about = mysqli_real_escape_string($conn,$_POST['about']);
-$emailid = mysqli_real_escape_string($conn,$_POST['emailid']);
-$branch = mysqli_real_escape_string($conn,$_POST['branch']);
+$model = mysqli_real_escape_string($conn,$_POST['model']);
+$price = mysqli_real_escape_string($conn,$_POST['price']);
+$payment = mysqli_real_escape_string($conn,$_POST['payment']);
 
 
  if($_POST['action']=="add")
  {
- $remark = mysqli_real_escape_string($conn,$_POST['remark']);
- $fees = mysqli_real_escape_string($conn,$_POST['fees']);
- $advancefees = mysqli_real_escape_string($conn,$_POST['advancefees']);
- $balance = $fees-$advancefees;
  
-  $q1 = $conn->query("INSERT INTO student (sname,joindate,contact,about,emailid,branch,balance,fees) VALUES ('$sname','$joindate','$contact','$about','$emailid','$branch','$balance','$fees')") ;
-  
-  $sid = $conn->insert_id;
-  
- $conn->query("INSERT INTO  fees_transaction (stdid,paid,submitdate,transcation_remark) VALUES ('$sid','$advancefees','$joindate','$remark')") ;
-    
-   echo '<script type="text/javascript">window.location="student.php?act=1";</script>';
+  $q1 = $conn->query("INSERT INTO customer (cname,address,contact,model,price,payment) VALUES ('$cname','$address','$contact','$model','$price','$payment')") ;
+     
+   echo '<script type="text/javascript">window.location="customer.php?act=1";</script>';
  
  }else
   if($_POST['action']=="update")
  {
  $id = mysqli_real_escape_string($conn,$_POST['id']);	
-   $sql = $conn->query("UPDATE  student  SET  branch  = '$branch', address  = '$address', detail  = '$detail'  WHERE  id  = '$id'");
-   echo '<script type="text/javascript">window.location="student.php?act=2";</script>';
+   $sql = $conn->query("UPDATE  customer  SET  contact  = '$contact', address  = '$address', model  = '$model', price  = '$price', payment  = '$payment'  WHERE  id  = '$id'");
+   echo '<script type="text/javascript">window.location="customer.php?act=2";</script>';
  }
-
-
 
 }
 
 
-
-
+//delete
 if(isset($_GET['action']) && $_GET['action']=="delete"){
 
-$conn->query("UPDATE  student set delete_status = '1'  WHERE id='".$_GET['id']."'");	
+$conn->query("UPDATE  customer set delete_status = '1'  WHERE id='".$_GET['id']."'");	
 header("location: customer.php?act=3");
 
 }
@@ -70,7 +55,7 @@ $action = "add";
 if(isset($_GET['action']) && $_GET['action']=="edit" ){
 $id = isset($_GET['id'])?mysqli_real_escape_string($conn,$_GET['id']):'';
 
-$sqlEdit = $conn->query("SELECT * FROM student WHERE id='".$id."'");
+$sqlEdit = $conn->query("SELECT * FROM customer WHERE id='".$id."'");
 if($sqlEdit->num_rows)
 {
 $rowsEdit = $sqlEdit->fetch_assoc();
@@ -86,14 +71,14 @@ $_GET['action']="";
 
 if(isset($_REQUEST['act']) && @$_REQUEST['act']=="1")
 {
-$errormsg = "<div class='alert alert-success'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> Student Add successfully</div>";
+$errormsg = "<div class='alert alert-success'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> Customer Added successfully</div>";
 }else if(isset($_REQUEST['act']) && @$_REQUEST['act']=="2")
 {
-$errormsg = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a> <strong>Success!</strong> Student Edit successfully</div>";
+$errormsg = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a> <strong>Success!</strong> Customer Edited successfully</div>";
 }
 else if(isset($_REQUEST['act']) && @$_REQUEST['act']=="3")
 {
-$errormsg = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> Student Delete successfully</div>";
+$errormsg = "<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> Customer Deleted successfully</div>";
 }
 
 ?>
@@ -135,7 +120,7 @@ include("php/header.php");
                         <h1 class="page-head-line">Customers 
 						<?php
 						echo (isset($_GET['action']) && @$_GET['action']=="add" || @$_GET['action']=="edit")?
-						' <a href="student.php" class="btn btn-primary btn-sm pull-right">Back <i class="glyphicon glyphicon-arrow-right"></i></a>':'<a href="student.php?action=add" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i> Add </a>';
+						' <a href="customer.php" class="btn btn-primary btn-sm pull-right">Back <i class="glyphicon glyphicon-arrow-right"></i></a>':'<a href="customer.php?action=add" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i> Add </a>';
 						?>
 						</h1>
                      
@@ -157,121 +142,59 @@ echo $errormsg;
                 <div class="row">
 				
                     <div class="col-sm-10 col-sm-offset-1">
-               <div class="panel panel-primary">
+               			<div class="panel panel-primary">
                         <div class="panel-heading">
-                           <?php echo ($action=="add")? "Add Student": "Edit Student"; ?>
+                           <?php echo ($action=="add")? "Add Customer": "Edit Customer"; ?>
                         </div>
-						<form action="student.php" method="post" id="signupForm1" class="form-horizontal">
+						<form action="customer.php" method="post" id="signupForm1" class="form-horizontal">
                         <div class="panel-body">
 						<fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Personal Information:</legend>
+						 <legend  class="scheduler-border">Customer Information:</legend>
 						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Name* </label>
+								<label class="col-sm-2 control-label" for="Old">Name</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="sname" name="sname" value="<?php echo $sname;?>"  />
+									<input type="text" class="form-control" id="cname" name="cname" value="<?php echo $cname;?>"  />
 								</div>
 							</div>
 						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Contact* </label>
+								<label class="col-sm-2 control-label" for="Old">Address</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="address" name="address" value="<?php echo $address;?>" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="Old">Contact</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="contact" name="contact" value="<?php echo $contact;?>" maxlength="10" />
 								</div>
-							</div>
-							
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Branch* </label>
-								<div class="col-sm-10">
-									<select  class="form-control" id="branch" name="branch" >
-									<option value="" >Select Branch</option>
-                                    <?php
-									$sql = "select * from branch where delete_status='0' order by branch.branch asc";
-									$q = $conn->query($sql);
-									
-									while($r = $q->fetch_assoc())
-									{
-									echo '<option value="'.$r['id'].'"  '.(($branch==$r['id'])?'selected="selected"':'').'>'.$r['branch'].'</option>';
-									}
-									?>									
-									
-									</select>
-								</div>
-						</div>
-						
-						
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">DOJ* </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="joindate" name="joindate" value="<?php echo  ($joindate!='')?date("Y-m-d", strtotime($joindate)):'';?>" style="background-color: #fff;" readonly />
-								</div>
-							</div>
+							</div>				
 						 </fieldset>
 						
 						
 							<fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Fee Information:</legend>
+						 <legend  class="scheduler-border">Car Information:</legend>
 						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Total Fees* </label>
+								<label class="col-sm-2 control-label" for="Old">Car Model </label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="fees" name="fees" value="<?php echo $fees;?>" <?php echo ($action=="update")?"disabled":""; ?>  />
+									<input type="text" class="form-control" id="model" name="model" value="<?php echo $model;?>" />
 								</div>
 						</div>
 						
-						<?php
-						if($action=="add")
-						{
-						?>
 						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Advance Fee* </label>
+								<label class="col-sm-2 control-label" for="Old">Price </label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="advancefees" name="advancefees" readonly   />
-								</div>
-						</div>
-						<?php
-						}
-						?>
-						
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Balance </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control"  id="balance" name="balance" value="<?php echo $balance;?>" disabled />
+									<input type="text" class="form-control" id="price" name="price" value="<?php echo $price;?>" />
 								</div>
 						</div>
 						
-						
-						
-							
-							<?php
-						if($action=="add")
-						{
-						?>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Password">Fee Remark </label>
+						<div class="form-group">
+								<label class="col-sm-2 control-label" for="Old">Payment </label>
 								<div class="col-sm-10">
-	                        <textarea class="form-control" id="remark" name="remark"><?php echo $remark;?></textarea >
+									<input type="text" class="form-control" id="payment" name="payment" value="<?php echo $payment;?>" />
 								</div>
-							</div>
-						<?php
-						}
-						?>
+						</div>
 							
-							</fieldset>
-							
-							 <fieldset class="scheduler-border" >
-						 <legend  class="scheduler-border">Optional Information:</legend>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Password">About Student </label>
-								<div class="col-sm-10">
-	                        <textarea class="form-control" id="about" name="about"><?php echo $about;?></textarea >
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Email Id </label>
-								<div class="col-sm-10">
-									
-									<input type="text" class="form-control" id="emailid" name="emailid" value="<?php echo $emailid;?>"  />
-								</div>
-						    </div>
 							</fieldset>
 						
 						<div class="form-group">
@@ -279,17 +202,9 @@ echo $errormsg;
 								<input type="hidden" name="id" value="<?php echo $id;?>">
 								<input type="hidden" name="action" value="<?php echo $action;?>">
 								
-									<button type="submit" name="save" class="btn btn-primary">Save </button>
-								 
-								   
-								   
+									<button type="submit" name="save" class="btn btn-primary">Save </button> 
 								</div>
 							</div>
-                         
-                           
-                           
-                         
-                           
                          </div>
 							</form>
 							
@@ -325,28 +240,16 @@ yearRange: "1970:<?php echo date('Y');?>"
 		 
 			$( "#signupForm1" ).validate( {
 				rules: {
-					sname: "required",
-					joindate: "required",
-					emailid: "email",
-					branch: "required",
+					cname: "required",
+					address: "required",
+					contact: "required",
+					payment: "required",
 					
 					
 					contact: {
 						required: true,
 						digits: true
 					},
-					
-					fees: {
-						required: true,
-						digits: true
-					},
-					
-					
-					advancefees: {
-						required: true,
-						digits: true
-					},
-				
 					
 				},
 			<?php
@@ -356,10 +259,10 @@ yearRange: "1970:<?php echo date('Y');?>"
 			
 			$( "#signupForm1" ).validate( {
 				rules: {
-					sname: "required",
-					joindate: "required",
-					emailid: "email",
-					branch: "required",
+					cname: "required",
+					address: "required",
+					contact: "required",
+					payment: "required",
 					
 					
 					contact: {
@@ -414,48 +317,6 @@ yearRange: "1970:<?php echo date('Y');?>"
 			}
 			
 		} );
-		
-		
-		
-		$("#fees").keyup( function(){
-		$("#advancefees").val("");
-		$("#balance").val(0);
-		var fee = $.trim($(this).val());
-		if( fee!='' && !isNaN(fee))
-		{
-		$("#advancefees").removeAttr("readonly");
-		$("#balance").val(fee);
-		$('#advancefees').rules("add", {
-            max: parseInt(fee)
-        });
-		
-		}
-		else{
-		$("#advancefees").attr("readonly","readonly");
-		}
-		
-		});
-		
-		
-		
-		
-		$("#advancefees").keyup( function(){
-		
-		var advancefees = parseInt($.trim($(this).val()));
-		var totalfee = parseInt($("#fees").val());
-		if( advancefees!='' && !isNaN(advancefees) && advancefees<=totalfee)
-		{
-		var balance = totalfee-advancefees;
-		$("#balance").val(balance);
-		
-		}
-		else{
-		$("#balance").val(totalfee);
-		}
-		
-		});
-		
-		
 	</script>
 
 
@@ -490,25 +351,23 @@ yearRange: "1970:<?php echo date('Y');?>"
                                     </thead>
                                     <tbody>
 									<?php
-									$sql = "select * from student where delete_status='0'";
+									$sql = "select * from customer where delete_status='0'";
 									$q = $conn->query($sql);
 									$i=1;
 									while($r = $q->fetch_assoc())
 									{
 									
-									echo '<tr '.(($r['balance']>0)?'class="danger"':'').'>
+									echo '<tr>
                                             <td>'.$i.'</td>
-                                            <td>'.$r['sname'].'<br/>'.$r['contact'].'</td>
-                                            <td>'.date("d M y", strtotime($r['joindate'])).'</td>
-                                            <td>'.$r['fees'].'</td>
-											<td>'.$r['balance'].'</td>
-											<td>
+                                            <td>'.$r['cname'].'</td>
+                                            <td>'.$r['address'].'</td>
+                                            <td>'.$r['contact'].'</td>
+											<td>'.$r['model'].'</td>
+											<td>'.$r['price'].'</td>
+											<td>'.$r['payment'].'</td>
+											<td><a href="customer.php?action=edit&id='.$r['id'].'" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
 											
-											
-
-											<a href="student.php?action=edit&id='.$r['id'].'" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-											
-											<a onclick="return confirm(\'Are you sure you want to delete this record\');" href="student.php?action=delete&id='.$r['id'].'" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a> </td>
+											<a onclick="return confirm(\'Are you sure you want to delete this record\');" href="customer.php?action=delete&id='.$r['id'].'" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a> </td>
 											
                                         </tr>';
 										$i++;
