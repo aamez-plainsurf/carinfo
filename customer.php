@@ -61,7 +61,7 @@ $branch = mysqli_real_escape_string($conn,$_POST['branch']);
 if(isset($_GET['action']) && $_GET['action']=="delete"){
 
 $conn->query("UPDATE  student set delete_status = '1'  WHERE id='".$_GET['id']."'");	
-header("location: student.php?act=3");
+header("location: customer.php?act=3");
 
 }
 
@@ -103,7 +103,7 @@ $errormsg = "<div class='alert alert-success'><a href='#' class='close' data-dis
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College Fees Payment System</title>
+    <title>Morris Garage</title>
 
     <!-- BOOTSTRAP STYLES-->
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -471,18 +471,20 @@ yearRange: "1970:<?php echo date('Y');?>"
 		 
 		<div class="panel panel-default">
                         <div class="panel-heading">
-                            Manage Student  
+                            Manage Customers  
                         </div>
                         <div class="panel-body">
                             <div class="table-sorting table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="tSortable22">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name/Contact</th>
-                                            <th>DOJ</th>
-                                            <th>Fees</th>
-											<th>Balance</th>
+                                            <th>Sr.No</th>
+                                            <th>Customer Name</th>
+                                            <th>Address</th>
+                                            <th>Contact No</th>
+											<th>Car Model</th>
+											<th>Price</th>
+											<th>Payment</th>
 											<th>Action</th>
                                         </tr>
                                     </thead>

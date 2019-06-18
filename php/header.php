@@ -24,11 +24,11 @@
                     </li>
 					
 					 <li>
-                        <a href="student.php"><i class="fa fa-file-text "></i>Customer List</a>
+                        <a href="customer.php"><i class="fa fa-file-text "></i>Customer List</a>
                     </li>
 					
 					 <li>
-                        <a href="branch.php"><i class="fa fa-cogs "></i>Backup</a>
+                        <a href="backup.php"><i class="fa fa-cogs "></i>Backup</a>
                     </li>
 					
 					 <li>
