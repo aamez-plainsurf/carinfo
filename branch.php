@@ -82,7 +82,7 @@ $errormsg = "<div class='alert alert-success'><strong>Success!</strong> Branch D
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College Fees Payment System</title>
+    <title>Morris Garage</title>
 
     <!-- BOOTSTRAP STYLES-->
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -110,228 +110,33 @@ include("php/header.php");
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Customers  
-						<?php
-						echo (isset($_GET['action']) && @$_GET['action']=="add" || @$_GET['action']=="edit")?
-						' <a href="branch.php" class="btn btn-primary btn-sm pull-right">Back <i class="glyphicon glyphicon-arrow-right"></i></a>':'<a href="branch.php?action=add" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i> Add </a>';
-						?>
-						</h1>
-                     
-<?php
+                     <div class="row">
+				
+				 
+					 <div class="col-md-6">
+                        <div class="main-box mb-red">
+                            <a href="student.php">
+                                <i class="fa fa-file-text fa-5x"></i>
+                                <h5>Customer List</h5>
+                            </a>
+                        </div>
+                    </div>
 
-echo $errormsg;
-?>
+                     <div class="col-md-6">
+                        <div class="main-box mb-pink">
+                            <a href="banch.php">
+                                <i class="fa fa-users fa-5x"></i>
+                                <h5>Backup</h5>
+                            </a>
+                        </div>
+                    </div>
+                  
+
+                </div>
                     </div>
                 </div>
-				
-				
-				
-        <?php 
-		 if(isset($_GET['action']) && @$_GET['action']=="add" || @$_GET['action']=="edit")
-		 {
-		?>
-		
-			<script type="text/javascript" src="js/validation/jquery.validate.min.js"></script>
-                <div class="row">
-				
-                    <div class="col-sm-8 col-sm-offset-2">
-               <div class="panel panel-primary">
-                        <div class="panel-heading">
-                           <?php echo ($action=="add")? "Add Branch": "Edit Branch"; ?>
-                        </div>
-						<form action="branch.php" method="post" id="signupForm1" class="form-horizontal">
-                        <div class="panel-body">
-						
-						
-						
-						
-						<div class="form-group">
-								<label class="col-sm-2 control-label" for="Old">Customer </label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="branch" name="branch" value="<?php echo $branch;?>"  />
-								</div>
-							</div>
-							
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Password"> Year </label>
-								<div class="col-sm-10">
-	                        <textarea class="form-control" id="address" name="address"><?php echo $address;?></textarea >
-								</div>
-							</div>
-							
-							
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="Confirm"> Detail</label>
-								<div class="col-sm-10">
-									    <textarea class="form-control" name="detail" id="detail"><?php echo $detail;?></textarea >
-								</div>
-							</div>
-						
-						<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-2">
-								<input type="hidden" name="id" value="<?php echo $id;?>">
-								<input type="hidden" name="action" value="<?php echo $action;?>">
-								
-									<button type="submit" name="save" class="btn btn-primary">Save </button>
-								</div>
-							</div>
-                         
-                           
-                           
-                         
-                           
-                         </div>
-							</form>
-							
-                        </div>
-                            </div>
-            
-			
-                </div>
-               
-
-			   
-			   
-		<script type="text/javascript">
-		
-
-		$( document ).ready( function () {			
-			
-			 if($("#signupForm1").length > 0)
-         {
-			$( "#signupForm1" ).validate( {
-				rules: {
-					branch: "required",
-					address: "required"
-					
-				
-					
-				},
-				messages: {
-					branch: "Please enter branch name",
-					address: "Please enter address"
-					
-					
-				},
-				errorElement: "em",
-				errorPlacement: function ( error, element ) {
-					// Add the `help-block` class to the error element
-					error.addClass( "help-block" );
-
-					// Add `has-feedback` class to the parent div.form-group
-					// in order to add icons to inputs
-					element.parents( ".col-sm-10" ).addClass( "has-feedback" );
-
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertAfter( element.parent( "label" ) );
-					} else {
-						error.insertAfter( element );
-					}
-
-					// Add the span element, if doesn't exists, and apply the icon classes to it.
-					if ( !element.next( "span" )[ 0 ] ) {
-						$( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
-					}
-				},
-				success: function ( label, element ) {
-					// Add the span element, if doesn't exists, and apply the icon classes to it.
-					if ( !$( element ).next( "span" )[ 0 ] ) {
-						$( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
-					}
-				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".col-sm-10" ).addClass( "has-error" ).removeClass( "has-success" );
-					$( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
-				},
-				unhighlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".col-sm-10" ).addClass( "has-success" ).removeClass( "has-error" );
-					$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
-				}
-			} );
-			
-			}
-			
-		} );
-	</script>
-
-
-			   
-		<?php
-		}else{
-		?>
 		
 		 <link href="css/datatable/datatable.css" rel="stylesheet" />
-		 
-		
-		 
-		 
-		<div class="panel panel-default">
-                        <div class="panel-heading">
-                            Manage Branch  
-                        </div>
-                        <div class="panel-body">
-                             <div class="table-sorting table-responsive">
-
-                                <table class="table table-striped table-bordered table-hover" id="tSortable22">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Branch</th>
-                                            <th>Year</th>
-                                            <th>Detail</th>
-											<th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php
-									$sql = "select * from branch where delete_status='0'";
-									$q = $conn->query($sql);
-									$i=1;
-									while($r = $q->fetch_assoc())
-									{
-									echo '<tr>
-                                            <td>'.$i.'</td>
-                                            <td>'.$r['branch'].'</td>
-                                            <td>'.$r['address'].'</td>
-                                            <td>'.$r['detail'].'</td>
-											<td>
-											<a href="branch.php?action=edit&id='.$r['id'].'" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-											
-											<a onclick="return confirm(\'Are you sure you want to delete this record\');" href="branch.php?action=delete&id='.$r['id'].'" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a> </td>
-                                        </tr>';
-										$i++;
-									}
-									?>
-									
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                     
-	<script src="js/dataTable/jquery.dataTables.min.js"></script>
-     <script>
-         $(document).ready(function () {
-             $('#tSortable22').dataTable({
-    "bPaginate": true,
-    "bLengthChange": false,
-    "bFilter": true,
-    "bInfo": false,
-    "bAutoWidth": true });
-	
-         });
-		 
-	
-    </script>
-		
-		<?php
-		}
-		?>
-				
-				
             
             </div>
             <!-- /. PAGE INNER  -->

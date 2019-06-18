@@ -28,7 +28,7 @@
                     </li>
 					
 					 <li>
-                        <a href="student.php"><i class="fa fa-cogs "></i>Backup</a>
+                        <a href="branch.php"><i class="fa fa-cogs "></i>Backup</a>
                     </li>
 					
 					 <li>
