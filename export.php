@@ -1,4 +1,3 @@
-<!-- json export -->
 <?php  
 //PDO is a extension which  defines a lightweight, consistent interface for accessing databases in PHP.  
 $db=new PDO('mysql:dbname=carinfo;host=localhost;','root','');  
@@ -26,6 +25,15 @@ $json_array['id']=$rec['id'];
   
 //built in PHP function to encode the data in to JSON format  
 echo json_encode($json_data);  
+
+
+//download json file
+$file = 'carinfo.json';
+file_put_contents($file, json_encode($json_data));
+header("Content-type: application/json");
+header('Content-Disposition: attachment; filename="'.basename($file).'"'); 
+header('Content-Length: ' . filesize($file));
+readfile($file);
   
   
 ?>
