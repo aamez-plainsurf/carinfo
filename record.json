@@ -1,0 +1,5 @@
+[{"id":"1","cname":"ram","address":"dubai","contact":"7887778788","model":"sedan","price":"4000000","payment":"chalan"},
+{"id":"5","cname":"shaam","address":"kondwa pune","contact":"8887779999","model":"sedan","price":"500000","payment":"debit"},
+{"id":"7","cname":"maheen","address":"ahmednagar","contact":"8149507962","model":"suv","price":"1500000","payment":"cheque"},
+{"id":"10","cname":"aamez","address":"delhi","contact":"7028185038","model":"suv","price":"7000000","payment":"net banking"},
+{"id":"9","cname":"sayed","address":"indore","contact":"7988585456","model":"suv","price":"5000000","payment":"cash"}]

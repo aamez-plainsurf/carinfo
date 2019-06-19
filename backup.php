@@ -37,16 +37,27 @@ include("php/header.php");
 				 
 					 <div class="col-md-6">
                         <div class="main-box mb-red">
-                            <a href="#">
+                                <a href="import.php">
                                 <i class="fa fa-file-text fa-5x"></i>
                                 <h5>Import</h5>
+                                <form class="md-form" method="post" enctype="multipart/form-data">
+                                  <div class="file-field">
+                                    <div class="btn btn-sm">
+                                      <span></span>
+                                      <input type="file" name="jsonFile">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                      <input type="submit" value="Import" name="buttomImport">
+                                    </div>
+                                  </div>
+                                </form>
                             </a>
                         </div>
                     </div>
 
                      <div class="col-md-6">
                         <div class="main-box mb-pink">
-                            <a href="#">
+                            <a href="export.php">
                                 <i class="fa fa-file-text fa-5x"></i>
                                 <h5>Export</h5>
                             </a>
@@ -57,7 +68,8 @@ include("php/header.php");
                 </div>
                     </div>
                 </div>
-		
+
+
 		 <link href="css/datatable/datatable.css" rel="stylesheet" />
             
             </div>

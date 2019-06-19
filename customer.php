@@ -45,7 +45,7 @@ $payment = mysqli_real_escape_string($conn,$_POST['payment']);
 //delete
 if(isset($_GET['action']) && $_GET['action']=="delete"){
 
-$conn->query("UPDATE  customer set delete_status = '1'  WHERE id='".$_GET['id']."'");	
+$conn->query("DELETE FROM  customer WHERE id='".$_GET['id']."'");	
 header("location: customer.php?act=3");
 
 }
@@ -218,18 +218,6 @@ echo $errormsg;
 			   
 			   
 		<script type="text/javascript">
-		
-
-		$( document ).ready( function () {			
-			
-		$( "#joindate" ).datepicker({
-dateFormat:"yy-mm-dd",
-changeMonth: true,
-changeYear: true,
-yearRange: "1970:<?php echo date('Y');?>"
-});	
-		
-
 		
 		if($("#signupForm1").length > 0)
          {
