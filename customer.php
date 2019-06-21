@@ -1,6 +1,7 @@
 <?php
 include("php/dbconnect.php");
 include("php/checklogin.php");
+include("function.php");
 $errormsg = '';
 $action = "add";
 
@@ -327,6 +328,7 @@ echo $errormsg;
                                 <table class="table table-striped table-bordered table-hover" id="tSortable22">
                                     <thead>
                                         <tr>
+                                        	
                                             <th>Sr.No</th>
                                             <th>Customer Name</th>
                                             <th>Address</th>
@@ -335,6 +337,9 @@ echo $errormsg;
 											<th>Price</th>
 											<th>Payment</th>
 											<th>Action</th>
+											<th>
+                                        		<input type="checkbox" id="checkAll">
+                                        	</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -354,8 +359,9 @@ echo $errormsg;
 											<td>'.$r['price'].'</td>
 											<td>'.$r['payment'].'</td>
 											<td><a href="customer.php?action=edit&id='.$r['id'].'" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span></a>
-											
 											<a onclick="return confirm(\'Are you sure you want to delete this record\');" href="customer.php?action=delete&id='.$r['id'].'" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a> </td>
+											
+											<td><input class="checkbox" type="checkbox" id="'.$r['id'].'" name="'.$r['id'].'"></td>
 											
                                         </tr>';
 										$i++;
@@ -366,6 +372,8 @@ echo $errormsg;
                                         
                                     </tbody>
                                 </table>
+                                <br/>
+                                <button type="button" class="btn btn-danger btn-sm pull-right" id="delete">Delete Selected </button>
                             </div>
                         </div>
                     </div>
@@ -373,6 +381,55 @@ echo $errormsg;
 	<script src="js/dataTable/jquery.dataTables.min.js"></script>
     
      <script>
+//multiple deletes
+ $(document).ready(function(){
+      $('#checkAll').click(function(){
+         if(this.checked){
+             $('.checkbox').each(function(){
+                this.checked = true;
+             });   
+         }else{
+            $('.checkbox').each(function(){
+                this.checked = false;
+             });
+         } 
+      });
+
+
+    $('#delete').click(function(){
+       var dataArr  = new Array();
+       if($('input:checkbox:checked').length > 0){
+          $('input:checkbox:checked').each(function(){
+              dataArr.push($(this).attr('id'));
+              $(this).closest('tr').remove();
+          });
+          sendResponse(dataArr)
+       }else{
+         alert('No record selected ');
+       }
+
+    });  
+
+
+    function sendResponse(dataArr){
+        $.ajax({
+            type    : 'post',
+            url     : 'function.php',
+            data    : {'data' : dataArr},
+            success : function(response){
+                        alert(response);
+                      },
+            error   : function(errResponse){
+                      alert(errResponse);
+                      }                     
+        });
+    }
+
+  });
+
+
+
+
          $(document).ready(function () {
              $('#tSortable22').dataTable({
     "bPaginate": true,
