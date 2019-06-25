@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2019 at 04:24 PM
+-- Generation Time: Jun 25, 2019 at 06:36 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -48,7 +48,10 @@ INSERT INTO `customer` (`id`, `cname`, `address`, `contact`, `model`, `price`, `
 (5, 'shaam', 'kondwa pune', '8887779999', 'sedan', '500000', 'debit', '0'),
 (7, 'maheen', 'ahmednagar', '8149507962', 'suv', '1500000', 'cheque', '0'),
 (9, 'sayed', 'indore', '7988585456', 'suv', '5000000', 'cash', '0'),
-(10, 'aamez', 'delhi', '7028185038', 'suv', '7000000', 'net banking', '0');
+(10, 'aamez', 'delhi', '7028185038', 'suv', '7000000', 'net banking', '0'),
+(14, 'khan', 'gujrat', '8888888888', 'sedan', '500', 'paytm', '0'),
+(18, 'unknown', 'hydrabad', '7988555555', 'thar', '8000', 'card', '0'),
+(19, 'raju', 'thane', '8983678789', 'jeep', '250000', 'google pay', '0');
 
 -- --------------------------------------------------------
 
@@ -93,7 +96,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`

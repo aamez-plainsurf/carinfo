@@ -52,6 +52,7 @@ $error = 'Invalid Username or Password';
 margin-top:0px;
 margin-bottom:0px;
 text-align:center;
+color: #fff;
 }
 </style>
 
@@ -63,7 +64,7 @@ text-align:center;
                
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
                           
-                            <div class="panel-body" style="background-color: #E2E2E2; margin-top:50px; border:solid 3px #0e0e0e;">
+                            <div class="panel-body" style="background-color: #006b84; margin-top:50px; border:solid 3px #fff;">
 							  <h3 class="myhead">Morris Garage</h3>
                                 <form role="form" action="login.php" method="post">
                                     <hr />

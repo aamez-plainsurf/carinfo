@@ -40,14 +40,14 @@ include("php/header.php");
                                 <a href="import.php">
                                 <i class="fa fa-file-text fa-5x"></i>
                                 <h5>Import</h5>
-                                <form class="md-form" method="post" enctype="multipart/form-data">
+                                <form action="import.php" class="md-form" method="post" enctype="multipart/form-data">
                                   <div class="file-field">
                                     <div class="btn btn-sm">
                                       <span></span>
                                       <input type="file" name="jsonFile">
                                     </div>
                                     <div class="file-path-wrapper">
-                                      <input type="submit" value="Import" name="buttomImport">
+                                    <input type="submit" value="Import" name="buttomImport">
                                     </div>
                                   </div>
                                 </form>

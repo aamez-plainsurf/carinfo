@@ -900,7 +900,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #006b84;
 }
 input,
 button,
@@ -911,13 +911,13 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #428bca;
+  color: #d4d4d4;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #2a6496;
-  text-decoration: underline;
+  color: #fff;
+  text-decoration: blink;
 }
 a:focus {
   outline: thin dotted;
@@ -1178,7 +1178,7 @@ a.text-warning:hover {
   color: #66512c;
 }
 .text-danger {
-  color: #a94442;
+  color: #ff0500;
 }
 a.text-danger:hover {
   color: #843534;
@@ -2813,7 +2813,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary {
   color: #fff;
   background-color: #428bca;
-  border-color: #357ebd;
+  border-color: #000;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2821,8 +2821,9 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #3071a9;
-  border-color: #285e8e;
+  background-color: #007eff;
+  border-color: #fff;
+  transition: 1s;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -3537,6 +3538,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .input-group-addon:first-child {
   border-right: 0;
+  background-color: #006b84;
 }
 .input-group .form-control:last-child,
 .input-group-addon:last-child,
@@ -3547,6 +3549,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  background-color: #006b84;
+  color: #fff;
 }
 .input-group-addon:last-child {
   border-left: 0;
@@ -5197,9 +5201,9 @@ a.list-group-item-danger.active:focus {
   border-color: #ddd;
 }
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  color: #fff;
+  background-color: #006d8e;
+  border-color: #000;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;
